@@ -10,15 +10,15 @@
   <header class="w1 fix">
     <div class="con ac h1 jb">
       <a href="/" class="hov logo round"><h1>FakeBook</h1></a>
-      <?php if (!ss()) { ?>
-        <div class="fx g1">
-          <a href="/login" class="fb btn sign hov">Sign In</a>
-          <a href="/signup" class="fb btn sign hov">Sign Up</a>
-        </div>
-      <?php } else { ?>
+      <?php if (ss()) { ?>
         <div class="fx g1">
           <a href="/mypage" class="fb btn sign hov">My Page</a>
           <a href="/logout" class="fb btn sign hov">Sign Out</a>
+        </div>
+        <?php } else { ?>
+          <div class="fx g1">
+            <a href="/login" class="fb btn sign hov">Sign In</a>
+            <a href="/signup" class="fb btn sign hov">Sign Up</a>
         </div>
       <?php } ?>
     </div>
