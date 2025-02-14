@@ -13,9 +13,10 @@ function move($uri, $msg = null) {
   script("location.replace('$uri')");
 }
 
-function views($page, $data = [], $footer = true) {
+function views($page, $data = [], $banner = true, $footer = true) {
   extract($data);
   require_once("../views/template/header.php");
+  if ($banner) require_once("../views/template/banner.php");
   require_once("../views/$page.php"); 
-  if ($footer) require_once("../views/template/header.php");
+  if ($footer) require_once("../views/template/footer.php");
 }

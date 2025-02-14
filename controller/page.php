@@ -5,11 +5,11 @@ get('/', function() {
 });
 get('/login', function() {
   if (ss()) return move('/');
-  views('user/login', [], false);
+  views('user/login', [], false, false);
 });
 get('/signup', function() {
   if (ss()) return move('/');
-  views('user/register', [], false);
+  views('user/register', [], false, false);
 });
 post('/loginCtrl', function() {
   extract($_POST);
@@ -27,5 +27,27 @@ post('/registerCtrl', function() {
 });
 get('/logout', function() {
   session_destroy();
+  move('/');
+});
+get('/post', function() {
+  views('board/post');
+});
+get('/calendar', function() {
+  views('calendar');
+});
+get('/mypage', function() {
+  views('user/mypage');
+});
+get('/board/{id}', function($id) {
+  $data = ['fetch' => DB::fetch("select * from board where idx = '$id'")];
+  views('board/boardDetail', $data);
+});
+post('/addBoard', function() {
+  extract($_POST);
+  $id = ss()->id;
+  echo $id;
+  echo $title;
+  echo $content;
+  DB::exec("insert into board (user_id, title, content, time) values ('$id', '$title', '$content', now())");
   move('/');
 });

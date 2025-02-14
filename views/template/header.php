@@ -12,6 +12,7 @@
       <a href="/" class="hov logo round"><h1>FakeBook</h1></a>
       <?php if (ss()) { ?>
         <div class="fx g1">
+          <a href="/calendar" class="fb btn sign hov">Calendar</a>
           <a href="/mypage" class="fb btn sign hov">My Page</a>
           <a href="/logout" class="fb btn sign hov">Sign Out</a>
         </div>

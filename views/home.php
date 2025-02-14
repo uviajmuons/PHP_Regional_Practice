@@ -1,9 +1,22 @@
-<section class="gradient fxc notice"><p><b>NOTICE:</b>&nbsp;Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit hic deleniti laborum! Accusamus deserunt ad!</p></section>
-<main class="rel main-board con">
+<?php
+  $board = DB::fetchAll("select * from board order by time");
+?>
+<main class="main-board con">
+  <section class="board-list">
+    <?php foreach ($board as $b) {  ?>
+      <a href="/board">
+        <article class="w1 board-item jb ac">
+          <div class="board-user-info fx">
+            <img src="" alt="profile" />
+            <p class="user-id"><?= $b->user_id ?></p>
+          </div>
+          <h2 class="board-title"><?= $b->title ?></h2>
+          <p class="time"><?= $b->time ?></p>
+        </article>
+      </a>
+    <?php } ?>
+  </section>
   <?php if (ss()) { ?>
-    <nav class="fx abs g1 side-nav">
-      <a href="/calendar" class="btn fb hov nav-item">📅Calendar</a>
-      <a href="/post" class="btn fb hov nav-item">✏️Post</a>
-    </nav>
+    <a href="/post" class="btn fb hov abs post">✏️Post</a>
   <?php } ?>
 </main>
