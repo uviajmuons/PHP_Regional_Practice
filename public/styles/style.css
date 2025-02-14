@@ -31,7 +31,8 @@ p, b{ cursor: default; }
 .hov:hover{ transform: translateY(3px); }
 header{ z-index: 20; background-color: #fff; height: 100px; }
 .header-shadow{ box-shadow: #ddd 4px 2px 7px 2px; }
-.logo{ background-color: var(--blue); color: #fff; padding: .5rem 1rem; display: grid; }
+.logo{ background-color: var(--blue); color: #fff; padding: .5rem 1rem; }
+.sub-logo{ background-color: #fff; color: var(--blue); padding: .5rem 1rem; }
 .main-logo:hover{ transform: translateY(3px); }
 .sign{ padding: .75rem; color: var(--blue); border: 3px solid var(--blue); font-size: 20px; }
 .header-space{ height: 100px; width: 100%; }
@@ -45,7 +46,12 @@ aside.notice{ width: 100%; height: 70px; color: #fff; font-size: 18px; min-width
 .board-list{ overflow-y: scroll; height: 75vh; }
 .board-list::-webkit-scrollbar-track{ display: none; }
 .board-list::-webkit-scrollbar-button{ display: none; }
-.board-item{height: 200px; border-bottom: 2px solid var(--black); padding: 0 3rem;}
+.board-item{ height: 150px; padding: 0 3rem; }
+.board-item h2{ width: 60%; }
+.board-item-container:nth-child(odd) > article{ background-color: #ededed; }
+.board-item div.fx.ac{ gap: 4rem; }
+.board-user-profile{ border-radius: 50%; aspect-ratio: 1/1; width: 50px; text-align: center; line-height: 50px; font-size: 20px; }
+.likes b{ font-size: 20px; }
 
 .user-section{ background-color: #fff; height: 50vh; border-radius: 3rem; padding: 3rem 7rem; }
 .form-title{ text-transform: uppercase; color: var(--black); left: 17rem; font-size: 36px; }
@@ -65,3 +71,4 @@ button[type="submit"]:hover{ background-color: var(--black); }
 .board-post:hover{ background-color: var(--gray); color: #fff; }
 
 footer{ height: 200px; min-width: 1420px; margin-top: 4rem; }
+footer div.con{ color: #fff; gap: 10rem; }
