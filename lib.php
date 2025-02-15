@@ -9,8 +9,8 @@ function script($script) {
 }
 
 function move($uri, $msg = null) {
-  if ($msg) script("alert('$msg')");
-  script("location.replace('$uri')");
+  if ($msg) script("alert('$msg');");
+  script("location.replace('$uri');");
 }
 
 function views($page, $data = [], $banner = true, $footer = true) {
