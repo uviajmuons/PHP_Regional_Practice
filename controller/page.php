@@ -45,9 +45,6 @@ get('/board/{id}', function($id) {
 post('/addBoard', function() {
   extract($_POST);
   $id = ss()->id;
-  echo $id;
-  echo $title;
-  echo $content;
   DB::exec("insert into board (user_id, title, content, time) values ('$id', '$title', '$content', now())");
   move('/');
 });

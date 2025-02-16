@@ -8,7 +8,7 @@
     <?php foreach ($board as $b) {  ?>
       <?php $user_id = $b->user_id; ?>
       <?php $profileImg = DB::fetch("select img from user where id = '$user_id'"); ?>
-      <a href="/board" class="board-item-container">
+      <a href="/boardDetail/{<?= $b->idx; ?>}" class="board-item-container">
         <article class="w1 board-item jb ac">
           <div class="board-user-info fc ac">
             <?php if ($profileImg->img) { ?>
