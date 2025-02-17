@@ -48,3 +48,26 @@ post('/addBoard', function() {
   DB::exec("insert into board (user_id, title, content, time) values ('$id', '$title', '$content', now())");
   move('/');
 });
+post('/likePost', function() {
+  print_r($_POST['action']);
+  if ($_POST['action'] === 'like') {
+    extract($_POST);
+    $id = ss()->id;
+    $clicked = DB::fetch("select * from likes where board_idx = '$idx' and user_id = '$id'");
+    print_r($clicked);
+    if ($clicked) return move($_SERVER['HTTP_REFERER'], 'You have already liked the post.');
+    DB::exec("insert into likes (board_idx, user_id) values ('$idx', '$id')");
+    move($_SERVER['HTTP_REFERER']);
+  } else {
+    move($_SERVER['HTTP_REFERER'], 'Reported');
+  }
+});
+post('/addComment', function() {
+  extract($_POST);
+  $id = ss()->id;
+  echo $idx;
+  echo $id;
+  echo $comment;
+  DB::exec("insert into comment (board_idx, user_id, content, time) values ($idx, '$id', '$comment', now())");
+  move($_SERVER['HTTP_REFERER']);
+});

@@ -1,17 +1,16 @@
 <?php
-  $user_id;
-  $board = DB::fetchAll("select * from board order by time desc");
+  $board = DB::fetchAll("select * from board b inner join user u on b.user_id = u.id order by time desc");
 ?>
 
 <main class="main-board con">
   <section class="board-list">
     <?php foreach ($board as $b) {  ?>
-      <?php $user_id = $b->user_id; ?>
-      <?php $profileImg = DB::fetch("select img from user where id = '$user_id'"); ?>
-      <a href="/boardDetail/{<?= $b->idx; ?>}" class="board-item-container">
+      <?php $b->likes = DB::fetchAll("select count(*) as count from likes where board_idx = $b->idx"); ?>
+      <?php $b->comments = DB::fetchAll("select count(*) as count from comment where board_idx = $b->idx"); ?>
+      <a href="/board/<?= $b->idx; ?>" class="board-item-container">
         <article class="w1 board-item jb ac">
           <div class="board-user-info fc ac">
-            <?php if ($profileImg->img) { ?>
+            <?php if ($b->img) { ?>
               <img src="<?= $b->img ?>" alt="profile" class="board-user-profile" />
             <?php } else { ?>
               <div class="board-user-profile fb">NP</div>
@@ -21,7 +20,8 @@
           <h2 class="board-title"><?= $b->title ?></h2>
           <div class="fx ac">
             <p class="time"><?= $b->time ?></p>
-            <p class="likes"><b>❤️</b>&nbsp;<?= $b->likes ?></p>
+            <p class="likes"><b>❤️</b>&nbsp;<?= $b->likes[0]->count; ?></p>
+            <p class="comments"><b>💬</b>&nbsp;<?= $b->comments[0]->count; ?></p>
           </div>
         </article>
       </a>

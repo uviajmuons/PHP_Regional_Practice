@@ -1,4 +1,5 @@
 <?php 
+// require_once "./lib.php";
 class Router {
   static $routes = [];
   static function path($reqM, $uri, $hdl) {
@@ -19,7 +20,8 @@ class Router {
         return 'found';
       }
     }
-    header("location: /");
+    // header("location: /");
+    move('/', "wrong URI: $uri");
   }
 }
 
