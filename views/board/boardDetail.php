@@ -1,7 +1,7 @@
 <?php
-$comments = DB::fetchAll("select * from comment c inner join user u on c.user_id = u.id where board_idx = $fetch->idx order by c.time desc");
-$like = DB::fetchAll("select count(*) as count from likes where board_idx = $fetch->idx");
-$like = $like[0]->count;
+  $comments = DB::fetchAll("select * from comment c inner join user u on c.user_id = u.id where board_idx = $fetch->idx order by c.time desc");
+  $like = DB::fetchAll("select count(*) as count from likes where board_idx = $fetch->idx");
+  $like = $like[0]->count;
 ?>
 <main class="con fc">
   <section>
@@ -25,6 +25,9 @@ $like = $like[0]->count;
           <button class="btn hov" name="action" value="like" id="like">❤️ I like this post!</button>
         <?php } ?>
         <button class="btn hov" id="report">⚠️ Report</button>
+        <?php if (ss() && ss()->id === $fetch->user_id) { ?>
+          <button class="btn hov" name="action" value="edit" id="edit">🖊️ Edit post</button>
+        <?php } ?>
       </form>
     </div>
   </section>
@@ -41,7 +44,7 @@ $like = $like[0]->count;
             <img src="<?= $b->img ?>" alt="profile" class="board-user-profile" />
           <?php } else { ?>
             <div class="board-user-profile fb">NP</div>
-            <?php } ?>
+          <?php } ?>
           <p class="user-id"><?= $c->user_id ?></p>
         </div>
         <div class="jb ac f1 comment-container">

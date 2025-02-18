@@ -16,14 +16,14 @@ post('/loginCtrl', function() {
   $user = DB::fetch("select * from user where id = '$id' and pw = '$pw'");
   if (!$user) return move('/login', "Wrong ID or PW. Try again.");
   $_SESSION['ss'] = $user;
-  move('/', 'Login Successful!');
+  move('/');
 });
 post('/registerCtrl', function() {
   extract($_POST);
   $unique = DB::fetch("select * from user where id = '$id'");
   if ($unique) return move('/signup', 'The ID is already taken. Try again.');
   DB::exec("insert into user (id, pw) values ('$id', '$pw')");
-  move('/', 'Signup Successful!');
+  move('/');
 });
 get('/logout', function() {
   session_destroy();
@@ -58,6 +58,9 @@ post('/likePost', function() {
     if ($clicked) return move($_SERVER['HTTP_REFERER'], 'You have already liked the post.');
     DB::exec("insert into likes (board_idx, user_id) values ('$idx', '$id')");
     move($_SERVER['HTTP_REFERER']);
+  } else if ($_POST['action'] === 'edit') {
+    move('board/edit');
+    extract($_POST);
   } else {
     move($_SERVER['HTTP_REFERER'], 'Reported');
   }
