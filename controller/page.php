@@ -22,8 +22,8 @@ post('/registerCtrl', function() {
   extract($_POST);
   $unique = DB::fetch("select * from user where id = '$id'");
   if ($unique) return move('/signup', 'The ID is already taken. Try again.');
-  DB::exec("insert into user (id, pw) values ('$id', '$pw')");
-  move('/');
+  DB::exec("insert into user (id, pw, join_date) values ('$id', '$pw', curdate())");
+  move('/', 'signup successful');
 });
 get('/logout', function() {
   session_destroy();
@@ -36,7 +36,12 @@ get('/calendar', function() {
   views('calendar');
 });
 get('/mypage', function() {
-  views('user/mypage');
+  $data = ['fetch' => DB::fetch("select * from user where id = '$id'")];
+  views('user/user', $data);
+});
+get('/user/{id}', function($id) {
+  $data = ['fetch' => DB::fetch("select * from user where id = '$id'")];
+  views('user/user', $data);
 });
 get('/board/{id}', function($id) {
   $data = ['fetch' => DB::fetch("select * from board where idx = '$id'")];
@@ -55,9 +60,13 @@ post('/likePost', function() {
     $id = ss()->id;
     $clicked = DB::fetch("select * from likes where board_idx = '$idx' and user_id = '$id'");
     print_r($clicked);
-    if ($clicked) return move($_SERVER['HTTP_REFERER'], 'You have already liked the post.');
-    DB::exec("insert into likes (board_idx, user_id) values ('$idx', '$id')");
-    move($_SERVER['HTTP_REFERER']);
+    if ($clicked) {
+      DB::exec("delete from likes where board_idx = '$idx' and user_id = '$id'");
+      move($_SERVER['HTTP_REFERER']);
+    } else {
+      DB::exec("insert into likes (board_idx, user_id) values ('$idx', '$id')");
+      move($_SERVER['HTTP_REFERER']);
+    }
   } else if ($_POST['action'] === 'edit') {
     move('board/edit');
     extract($_POST);
@@ -73,4 +82,7 @@ post('/addComment', function() {
   echo $comment;
   DB::exec("insert into comment (board_idx, user_id, content, time) values ($idx, '$id', '$comment', now())");
   move($_SERVER['HTTP_REFERER']);
+});
+post('/editProfile', function() {
+  extract($_POST);
 });

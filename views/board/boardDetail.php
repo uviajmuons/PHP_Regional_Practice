@@ -5,9 +5,9 @@
 ?>
 <main class="con fc">
   <section>
-    <h1 class="post-title"><?= $fetch->title; ?></h1>
+    <h1 class="section-title post-title"><?= $fetch->title; ?></h1>
     <div class="jb post-nav">
-      <p>Post by <?= $fetch->user_id; ?></p>
+      <p>Post by <a href="/user/<?= $fetch->user_id; ?>" class="underline"><i><b class="cp"><?= $fetch->user_id; ?></b></i></a></p>
       <div class="fx g1">
         <p><?= $fetch->time; ?></p>
         <?php if ($like === 1) { ?>
@@ -32,21 +32,24 @@
     </div>
   </section>
   <section class="comment con">
-    <form action="/addComment" method="post" class="fx w1 rel">
-      <input type="hidden" name="idx" value="<?= $fetch->idx; ?>">
-      <input name="comment" class="f1" id="add-comment" placeholder="Add a comment to share your idea :)" />
-      <button class="cp abs">Comment</button>
-    </form>
+    <h1 class="section-title">Comments</h1>
+    <?php if (ss()) { ?>
+      <form action="/addComment" method="post" class="fx w1 rel">
+        <input type="hidden" name="idx" value="<?= $fetch->idx; ?>">
+        <input name="comment" class="f1" id="add-comment" placeholder="Add a comment to share your idea :)" />
+        <button class="cp abs">Comment</button>
+      </form>
+    <?php } ?>
     <?php foreach ($comments as $c) { ?>
       <article class="fx ac">
-        <div class="comment-user fc ac">
+        <a href="/user/<?= $c->user_id ?>" class="comment-user fc ac">
           <?php if ($c->img) { ?>
             <img src="<?= $b->img ?>" alt="profile" class="board-user-profile" />
           <?php } else { ?>
             <div class="board-user-profile fb">NP</div>
           <?php } ?>
           <p class="user-id"><?= $c->user_id ?></p>
-        </div>
+        </a>
         <div class="jb ac f1 comment-container">
           <div class="f1">
             <p><?= $c->content; ?></p>

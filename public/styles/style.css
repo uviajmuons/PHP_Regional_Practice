@@ -7,9 +7,9 @@ textarea{ resize: none; }
 :root{ --skyblue: #56ccef; --blue: #3d5c9b; --gray: #96a5aa; --black: #333; }
 
 /* util classes */
-.con{ width: 1420px; margin: 0 auto; position: relative; }
-.w1{ width: 100%; }
-.h1{ height: 100%; }
+.con{ width: 1420px !important; margin: 0 auto !important; position: relative !important; }
+.w1{ width: 100% !important; }
+.h1{ height: 100% !important; }
 .fx{ display: flex; }
 .fxc{ display: flex; align-items: center; justify-content: center; }
 .jb{ display: flex; justify-content: space-between; }
@@ -31,6 +31,9 @@ textarea{ resize: none; }
 .g1{ gap: 1rem; }
 .g2{ gap: 2rem; }
 .f1{ flex: 1; }
+.upc{ text-transform: uppercase !important; }
+.capz{ text-transform: capitalize !important; }
+.underline{ text-decoration: underline; }
 .gradient{ background: linear-gradient(135deg, var(--blue), var(--skyblue)); }
 .hov:hover{ transform: translateY(3px); }
 
@@ -43,7 +46,7 @@ header{ z-index: 20; background-color: #fff; height: 100px; }
 .sign{ padding: .75rem; color: var(--blue); border: 3px solid var(--blue); font-size: 20px; }
 .header-space{ height: 100px; width: 100%; }
 main.con{ padding: 5rem 0; }
-.section-title{ font-size: 48px; position: relative; text-transform: uppercase; color: var(--black); margin-bottom: 5rem; }
+.section-title{ font-size: 48px; position: relative; color: var(--black); margin-bottom: 5rem; }
 .section-title::before{ position: absolute; content: 'f'; text-transform: none; text-align: center; width: 130px; height: 50px; line-height: 50px; color: #fff; background-color: var(--skyblue); box-shadow: var(--gray) 2px 3px 2px 2px; opacity: .6; border-radius: 1rem 0 1rem 1rem; transform: rotate(32deg) translate(15%, -55%); z-index: -1; }
 aside.notice{ width: 100%; height: 70px; color: #fff; font-size: 18px; min-width: 1420px; }
 
@@ -55,10 +58,11 @@ aside.notice{ width: 100%; height: 70px; color: #fff; font-size: 18px; min-width
 .board-list::-webkit-scrollbar-button{ display: none; }
 .board-item{ height: 150px; padding: 0 3rem; }
 .board-item h2{ width: 60%; }
-.board-item-container:nth-child(odd) > article{ background-color: #ededed; }
+.board-list > .rel:nth-child(odd){ background-color: #ededed; }
 .board-item div.fx.ac{ gap: 3rem; }
-.board-user-info{ width: 110px; overflow: hidden; }
+.board-user-info{ width: 110px; overflow: hidden; top: 50%; left: 4rem; transform: translateY(-50%); }
 .board-user-profile{ border-radius: 50%; aspect-ratio: 1/1; width: 50px; text-align: center; line-height: 50px; font-size: 20px; }
+.board-title{ margin-left: 10rem; }
 .likes b, .comments b{ font-size: 20px; }
 .user-id{ margin-top: 10px; }
 
@@ -82,7 +86,7 @@ button[type="submit"]:hover{ background-color: var(--black); }
 .board-post:hover{ background-color: var(--gray); color: #fff; }
 
 /* post detail */
-.post-title{ font-size: 40px; margin-top: 5rem; }
+.post-title{ font-size: 40px; margin-top: 5rem; text-transform: none; }
 .post-nav{ margin-top: 2rem; font-size: 18px; }
 .post-content{ padding: 4rem 0 10rem 0; min-height: 500px; }
 .post-reaction{ bottom: 0; left: 50%; transform: translateX(-50%); }
@@ -93,8 +97,28 @@ button[type="submit"]:hover{ background-color: var(--black); }
 .comment article:nth-child(odd){ background-color: #ededed; }
 .comment article:nth-child(even){ background-color: #e1e1e1; }
 .comment article{ padding: 1rem 3rem; }
+.comment h1{ margin-bottom: 2rem; font-size: 40px; }
 #add-comment{ padding: 1rem; font-size: 16px; }
 .comment-container{ padding-left: 3rem; }
+
+/* mypage */
+.mypage-top{ padding: 3rem; }
+.mypage-bottom{ margin-top: 3rem; }
+.mypage-profile{ width: 300px; aspect-ratio: 1/1; border-radius: 50%; }
+label.mypage-profile h1{ font-size: 56px; }
+.mypage-user-id{ margin-top: 3rem; }
+#description{ margin-top: 1.5rem; font-size: 18px; color: var(--black); border: none; outline: none; border-bottom: 2px solid var(--black); padding: .5rem; width: 100%; text-align: center; }
+#description::placeholder{ font-style: italic; }
+.description-not-mypage{ border: none !important; }
+.user-detail{ height: 600px; font-size: 20px; }
+.user-detail div{ width: 600px; }
+#my-joined-date{ justify-content: right; }
+.user-board-list{ width: 1420px; }
+#my-gender #gender{ padding: .5rem; }
+#pw-change{ padding: .5rem; }
+.user-board-list > .rel:nth-child(odd){ background-color: #ededed; }
+.mt{ margin-top: 3rem; }
+.edit-profile{ margin-left: 75%; padding: .75rem; color: #fff; font-size: 20px; border: none; }
 
 /* footer */
 footer{ height: 200px; min-width: 1420px; margin-top: 4rem; }

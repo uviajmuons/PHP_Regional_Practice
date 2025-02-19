@@ -1,5 +1,5 @@
 <main class="con posting">
-  <h1 class="section-title">post</h1>
+  <h1 class="section-title capz">Post</h1>
   <section>
     <form action="/addBoard" method="post" class="fc post-form">
       <input type="text" name="title" id="board-title" placeholder="Title" autofocus required>

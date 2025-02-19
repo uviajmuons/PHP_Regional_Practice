@@ -7,24 +7,26 @@
     <?php foreach ($board as $b) {  ?>
       <?php $b->likes = DB::fetchAll("select count(*) as count from likes where board_idx = $b->idx"); ?>
       <?php $b->comments = DB::fetchAll("select count(*) as count from comment where board_idx = $b->idx"); ?>
-      <a href="/board/<?= $b->idx; ?>" class="board-item-container">
-        <article class="w1 board-item jb ac">
-          <div class="board-user-info fc ac">
-            <?php if ($b->img) { ?>
-              <img src="<?= $b->img ?>" alt="profile" class="board-user-profile" />
-            <?php } else { ?>
-              <div class="board-user-profile fb">NP</div>
-            <?php } ?>
-            <p class="user-id"><?= $b->user_id ?></p>
-          </div>
-          <h2 class="board-title"><?= $b->title ?></h2>
-          <div class="fx ac">
-            <p class="time"><?= $b->time ?></p>
-            <p class="likes"><b>❤️</b>&nbsp;<?= $b->likes[0]->count; ?></p>
-            <p class="comments"><b>💬</b>&nbsp;<?= $b->comments[0]->count; ?></p>
-          </div>
-        </article>
-      </a>
+      <div class="rel">
+        <a href="/board/<?= $b->idx; ?>" class="board-item-container">
+          <article class="w1 board-item jb ac">
+            <h2 class="board-title"><?= $b->title ?></h2>
+            <div class="fx ac">
+              <p class="time"><?= $b->time ?></p>
+              <p class="likes"><b>❤️</b>&nbsp;<?= $b->likes[0]->count; ?></p>
+              <p class="comments"><b>💬</b>&nbsp;<?= $b->comments[0]->count; ?></p>
+            </div>
+          </article>
+        </a>
+        <a href="/user/<?= $b->user_id; ?>" class="board-user-info cp fc ac abs">
+          <?php if ($b->img) { ?>
+            <img src="<?= $b->img ?>" alt="profile" class="board-user-profile" />
+          <?php } else { ?>
+            <div class="board-user-profile fb">NP</div>
+          <?php } ?>
+          <p class="user-id"><?= $b->user_id ?></p>
+        </a>
+      </div>
     <?php } ?>
   </section>
   <?php if (ss()) { ?>
