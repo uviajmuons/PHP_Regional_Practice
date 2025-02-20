@@ -50,7 +50,13 @@ get('/board/{id}', function($id) {
 post('/addBoard', function() {
   extract($_POST);
   $id = ss()->id;
-  DB::exec("insert into board (user_id, title, content, time) values ('$id', '$title', '$content', now())");
+  $from = $_FILES['img']['tmp_name'];
+  $img = 'uploads/' . time() . $_FILES['img']['name'];
+  if (move_uploaded_file($from, $img)) {
+    DB::exec("insert into board (user_id, title, content, time, img) values ('$id', '$title', '$content', now(), '$img')");
+  } else {
+    DB::exec("insert into board (user_id, title, content, time) values ('$id', '$title', '$content', now())");
+  }
   move('/');
 });
 post('/likePost', function() {
@@ -68,8 +74,12 @@ post('/likePost', function() {
       move($_SERVER['HTTP_REFERER']);
     }
   } else if ($_POST['action'] === 'edit') {
-    move('board/edit');
     extract($_POST);
+    move('board/edit');
+  } else if ($_POST['action'] === 'delete') {
+    extract($_POST);
+    DB::exec("delete from board where idx = '$idx'");
+    move('/', 'deleted');
   } else {
     move($_SERVER['HTTP_REFERER'], 'Reported');
   }

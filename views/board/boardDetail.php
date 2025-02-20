@@ -18,6 +18,9 @@
       </div>
     </div>
     <div class="post-content rel">
+      <?php if ($fetch->img) { ?>
+        <img src="/<?= $fetch->img ?>" alt="img" class="w1" />
+      <?php } ?>
       <p><?= $fetch->content; ?></p>
       <form action="/likePost" method="post" class="fx abs g1 post-reaction">
         <input type="hidden" name="idx" value="<?= $fetch->idx; ?>">
@@ -27,6 +30,7 @@
         <button class="btn hov" id="report">⚠️ Report</button>
         <?php if (ss() && ss()->id === $fetch->user_id) { ?>
           <button class="btn hov" name="action" value="edit" id="edit">🖊️ Edit post</button>
+          <button class="btn hov" name="action" value="delete" id="delete">🗑️ Delete post</button>
         <?php } ?>
       </form>
     </div>
