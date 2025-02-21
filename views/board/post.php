@@ -13,5 +13,5 @@
 </main>
 
 <script>
-  $('#img').oninput = (e) => imgFileLoader(e);
+  $('#img').oninput = (e) => imgFileLoader(e, '.post-insert-img');
 </script>

@@ -7,9 +7,9 @@ this.onscroll = () => {
   else $header.classList.remove('header-shadow');
 }
 
-const imgFileLoader = (e) => {
+const imgFileLoader = (e, selector, objfit = false) => {
   const file = e.target.files[0];
   const reader = new FileReader();
-  reader.onload = ({ target }) => { $('.post-insert-img').innerHTML = ` <img src="${target.result}" alt="${file.name}" style="width: 100%; height: 100%;">` ;};
+  reader.onload = ({ target }) => { $(selector).innerHTML = `<img src="${target.result}" alt="${file.name}" style="width: 100%; height: 100%; ${ objfit === true ? 'object-fit: cover;' : '' }">` ;};
   reader.readAsDataURL(file);
 }
