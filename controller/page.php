@@ -60,9 +60,8 @@ post('/addBoard', function() {
   move('/');
 });
 post('/likePost', function() {
-  print_r($_POST['action']);
+  extract($_POST);
   if ($_POST['action'] === 'like') {
-    extract($_POST);
     $id = ss()->id;
     $clicked = DB::fetch("select * from likes where board_idx = '$idx' and user_id = '$id'");
     print_r($clicked);
@@ -74,10 +73,9 @@ post('/likePost', function() {
       move($_SERVER['HTTP_REFERER']);
     }
   } else if ($_POST['action'] === 'edit') {
-    extract($_POST);
-    move('board/edit');
+    $data = ['fetch' => DB::fetch("select * from board where idx = $idx")];
+    views('board/edit', $data);
   } else if ($_POST['action'] === 'delete') {
-    extract($_POST);
     DB::exec("delete from board where idx = '$idx'");
     move('/', 'deleted');
   } else {
@@ -104,4 +102,16 @@ post('/editProfile', function() {
     DB::exec("update user set description = '$description', gender = '$gender', pw = '$pw' where id = '$id'");
   }
   move($_SERVER['HTTP_REFERER']);
+});
+post('/editBoard', function() {
+  extract($_POST);
+  if ($_POST['action'] === "edit") {
+    DB::exec("update board set img = '$img', content = '$content', title = '$title', status = 'fixed' where idx = '$idx'");
+  } else {
+    $from = $_FILES['img']['tmp_name'];
+    $img = 'uploads/' . time() . $_FILES['img']['name'];
+    move_uploaded_file($from, $img);
+    DB::exec("update board set img = '$img', content = '$content', title = '$title', status = 'fixed' where idx = '$idx'");
+  }
+  move('/');
 });

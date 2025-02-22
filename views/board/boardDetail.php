@@ -48,7 +48,7 @@
       <article class="fx ac">
         <a href="/user/<?= $c->user_id ?>" class="comment-user fc ac">
           <?php if ($c->img) { ?>
-            <img src="<?= $b->img ?>" alt="profile" class="board-user-profile" />
+            <img src="/<?= $c->img; ?>" alt="profile" class="board-user-profile" />
           <?php } else { ?>
             <div class="board-user-profile fb">NP</div>
           <?php } ?>
