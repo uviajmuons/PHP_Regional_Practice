@@ -1,6 +1,5 @@
-<?= $fetch->content; ?>
 <main class="con fc">
-  <h1 class="section-title post-title upc">edit post</h1>
+  <h1 class="section-title post-title">Edit</h1>
   <section>
     <form action="/editBoard" method="post" class="fc post-form" enctype="multipart/form-data">
       <input type="text" name="title" id="board-title" value="<?= $fetch->title; ?>">

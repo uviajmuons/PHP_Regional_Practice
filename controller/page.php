@@ -64,7 +64,6 @@ post('/likePost', function() {
   if ($_POST['action'] === 'like') {
     $id = ss()->id;
     $clicked = DB::fetch("select * from likes where board_idx = '$idx' and user_id = '$id'");
-    print_r($clicked);
     if ($clicked) {
       DB::exec("delete from likes where board_idx = '$idx' and user_id = '$id'");
       move($_SERVER['HTTP_REFERER']);
@@ -85,15 +84,11 @@ post('/likePost', function() {
 post('/addComment', function() {
   extract($_POST);
   $id = ss()->id;
-  echo $idx;
-  echo $id;
-  echo $comment;
   DB::exec("insert into comment (board_idx, user_id, content, time) values ($idx, '$id', '$comment', now())");
   move($_SERVER['HTTP_REFERER']);
 });
 post('/editProfile', function() {
   extract($_POST);
-  echo $description;
   $from = $_FILES['img']['tmp_name'];
   $img = 'uploads/' . time() . $_FILES['img']['name'];
   if (move_uploaded_file($from, $img)) {
