@@ -11,6 +11,10 @@ get('/signup', function() {
   if (ss()) return move('/');
   views('user/register', [], false, false);
 });
+// post('/captcha', function() {
+//   extract($_POST);
+//   views('user/captcha', [], false, false);
+// });
 post('/loginCtrl', function() {
   extract($_POST);
   $user = DB::fetch("select * from user where id = '$id' and pw = '$pw'");
