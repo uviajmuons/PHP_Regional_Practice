@@ -10,6 +10,8 @@
     </section>
   </main>
   <script>
+    const $data = <?= json_encode(DB::fetchAll("select * from todo")); ?>;
+    console.log($data);
     const today = new Date();
     const baseDate = new Date(today.getFullYear(), today.getMonth(), 1);
     const weekdays = `
@@ -33,6 +35,18 @@
         ${weekdays}
         <div class="grid calendar-grid">
           ${`<div class="day"></div>`.repeat(firstDayThisMonth.getDay())}
+          ${[...Array(lastDayThisMonth.getDate())].fill(0).reduce((html, _, i) => {
+            const day = i + 1;
+            const thisDate = new Date(baseDate.getFullYear(), baseDate.getMonth(), day);
+            const todo = $data.filter(({ date }) => dateCompare(date, thisDate));
+            return html + `<div class="d ac">
+              ${day}
+              ${todo.reduce((html, {title, type}) => html + `<div class="fc" style="color: #000; align-items: end; padding-top: .5rem">
+                <p>${title}</p>
+                <small>${content}</small>
+              </div>`, '')}          
+            </div>`;
+          }, '')}
         </div>
       `;
     }

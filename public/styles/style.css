@@ -14,6 +14,7 @@ textarea{ resize: none; }
 .fxc{ display: flex; align-items: center; justify-content: center; }
 .jb{ display: flex; justify-content: space-between; }
 .ja{ display: flex; justify-content: space-around; }
+.jc{ display: flex; justify-content: center; }
 .ac{ display: flex; align-items: center; }
 .fc{ display: flex; flex-direction: column; }
 .ma0{ margin: 0 auto; }
@@ -135,7 +136,10 @@ label.mypage-profile h1{ font-size: 56px; }
 .weekdays{ margin-bottom: 5rem; }
 .sun{ color: #f00; }
 .sat{ color: var(--skyblue); }
-.calendar-grid{ grid-template-columns: repeat(7, 1fr); } 
+.calendar-grid{ grid-template-columns: repeat(7, 1fr); }
+.calendar-grid > div:nth-child(7n){ color: var(--skyblue); }
+.calendar-grid > div:nth-child(7n + 1){ color: red; }
+.d{ padding: 2rem 0; justify-content: right; }
 
 /* footer */
 footer{ height: 200px; min-width: 1420px; margin-top: 4rem; }
