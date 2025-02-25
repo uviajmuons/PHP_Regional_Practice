@@ -153,6 +153,12 @@ label.mypage-profile h1{ font-size: 56px; }
 .todo-form input::placeholder, .todo-form textarea::placeholder{ font-style: italic; }
 .todo-form textarea{ height: 100px; }
 
+/* schedule manage */
+.manage-todo{ margin-top: 3rem; }
+.todo-item{ height: 200px; padding: 0 4rem; }
+.todo-item:nth-child(even){ background-color: #ededed; }
+.todo-header{ background-color: #ededed; padding: 0 4rem; height: 120px; border-bottom: 2px solid #333; }
+
 /* footer */
 footer{ height: 200px; min-width: 1420px; margin-top: 4rem; }
 footer div.con{ color: #fff; gap: 10rem; }

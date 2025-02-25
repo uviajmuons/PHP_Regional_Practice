@@ -1,5 +1,6 @@
 <?php
   $id = ss()->id;
+  $todoList = DB::fetchAll("select * from todo where user_id = '$id' and status <> 'finished' order by begindate");
 ?>
 <div class="todo-modal fix ts rel">
   <form action="/addTodo" method="post" class="fc h1 todo-form">
@@ -24,6 +25,39 @@
     </div>
     <div class="calendar-content w1"></div>
     <div class="add-todo gradient hov fxc cp abs">Add To-do</div>
+  </section>
+  <section class="manage-todo fc">
+    <h1 class="section-title post-title">Manage Active To-do</h1>
+    <div class="jb todo-header">
+      <div class="f1 fxc">
+        <h3>Title</h3>
+      </div>
+      <div class="f1 fxc">
+        <h3>Begin Date</h3>
+      </div>
+      <div class="f1 fxc">
+        <h3>End Date</h3>
+      </div>
+      <div class="f1 fxc">
+        <h3>Status</h3>
+      </div>
+    </div>
+    <?php foreach ($todoList as $t) { ?>
+      <a href="/todo/<?= $t->idx; ?>" class="w1 todo-item jb ac">
+        <div class="f1 fxc">
+          <h3><?= $t->title; ?></h3>
+        </div>
+        <div class="f1 fxc">
+          <h3><?= $t->begindate; ?></h3>
+        </div>
+        <div class="f1 fxc">
+          <h3><?= $t->enddate; ?></h3>
+        </div>
+        <div class="f1 fxc">
+          <h3><?= $t->status; ?></h3>
+        </div>
+      </a>
+    <?php } ?> 
   </section>
 </main>
 

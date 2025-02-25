@@ -124,3 +124,7 @@ post('/addTodo', function() {
   DB::exec("insert into todo (user_id, title, content, begindate, enddate, color) values ('$id', '$todo', '$content', '$begindate', '$enddate', '$color')");
   move($_SERVER['HTTP_REFERER']);
 });
+get('/todo/{id}', function($id) {
+  $data = ['fetch' => DB::fetch("select * from todo where idx = '$id'")];
+  views('todo', $data);
+});
