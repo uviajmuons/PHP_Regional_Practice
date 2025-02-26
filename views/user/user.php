@@ -119,7 +119,7 @@
               </div>
             </article>
           </a>
-          <a href="<?= $b->user_id; ?>" class="board-user-info abs fc ac">
+          <a href="/user/<?= $b->user_id; ?>" class="board-user-info abs fc ac">
             <?php if ($b->img) { ?>
               <img src="/<?= $b->img; ?>" alt="profile" class="board-user-profile" />
             <?php } else { ?>
@@ -146,7 +146,7 @@
               </div>
             </article>
           </a>
-          <a href="<?= $l->user_id; ?>" class="board-user-info abs fc ac">
+          <a href="/user/<?= $l->user_id; ?>" class="board-user-info abs fc ac">
             <?php $uid = $l->user_id; ?>
             <?php $ld = DB::fetch("select * from user where id = '$uid'"); ?>
             <?php if ($ld->img) { ?>
