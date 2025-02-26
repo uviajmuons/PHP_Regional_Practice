@@ -164,7 +164,7 @@
 </main>
 
 <script>
-  $('#img').oninput = (e) => imgFileLoader(e, '.mypage-profile', true);
+  $('label[for="img"]').oninput = (e) => imgFileLoader(e, '.mypage-profile', true);
   function generateRandomHexColor() { return `#${((r, g, b) => (r = Math.floor(Math.random() * 156) + 100, g = Math.floor(Math.random() * 156) + 100, b = Math.floor(Math.random() * 156) + 100, `${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`))(0, 0, 0)}`; }
   $('.mypage-profile').style.backgroundColor = generateRandomHexColor();
   $$('div.board-user-profile').forEach(({ style }) => style.backgroundColor = generateRandomHexColor());

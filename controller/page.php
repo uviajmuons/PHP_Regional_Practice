@@ -116,10 +116,6 @@ post('/editBoard', function() {
 });
 post('/addTodo', function() {
   extract($_POST);
-  echo $todo;
-  echo $begindate;
-  echo $enddate;
-  echo $content;
   $id = ss()->id;
   DB::exec("insert into todo (user_id, title, content, begindate, enddate, color) values ('$id', '$todo', '$content', '$begindate', '$enddate', '$color')");
   move($_SERVER['HTTP_REFERER']);
