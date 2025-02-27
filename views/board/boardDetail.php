@@ -22,7 +22,7 @@
         <img src="/<?= $fetch->img ?>" alt="img" class="w1" />
       <?php } ?>
       <p><?= $fetch->content; ?></p>
-      <form action="/likePost" method="post" class="fx abs g1 post-reaction">
+      <form action="/boardCtrl" method="post" class="fx abs g1 post-reaction">
         <input type="hidden" name="idx" value="<?= $fetch->idx; ?>">
         <?php if (ss()) { ?>
           <button class="btn hov" name="action" value="like" id="like">❤️ I like this post!</button>

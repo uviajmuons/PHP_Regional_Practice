@@ -159,6 +159,16 @@ label.mypage-profile h1{ font-size: 56px; }
 .todo-item:nth-child(even){ background-color: #ededed; }
 .todo-header{ background-color: #ededed; padding: 0 4rem; height: 120px; border-bottom: 2px solid #333; }
 
+/* to-do */
+.todo-detail{ gap: 2rem; margin-bottom: 3rem; }
+.todo-detail input[name="title"]{ font-weight: bold; font-size: 20px; }
+.todo-detail textarea{ min-height: 300px; }
+.todo-detail input, .todo-detail textarea, .todo-detail select{ padding: 1rem; font-family: Malgun Gothic; }
+.todo-detail input::placeholder, .todo-detail textarea::placeholder{ font-style: italic; }
+.todo-detail input[type="date"]{ width: 500px; }
+.todo-detail p.fb{ font-size: 20px; }
+.todo-detail button{ padding: 1rem 2rem; right: 0; bottom: -5rem; font-size: 20px; border: none; color: #fff; border-radius: 10px; }
+
 /* footer */
 footer{ height: 200px; min-width: 1420px; margin-top: 4rem; }
 footer div.con{ color: #fff; gap: 10rem; }

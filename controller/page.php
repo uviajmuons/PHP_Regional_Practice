@@ -63,18 +63,17 @@ post('/addBoard', function() {
   }
   move('/');
 });
-post('/likePost', function() {
+post('/boardCtrl', function() {
   extract($_POST);
   if ($_POST['action'] === 'like') {
     $id = ss()->id;
     $clicked = DB::fetch("select * from likes where board_idx = '$idx' and user_id = '$id'");
     if ($clicked) {
       DB::exec("delete from likes where board_idx = '$idx' and user_id = '$id'");
-      move($_SERVER['HTTP_REFERER']);
     } else {
       DB::exec("insert into likes (board_idx, user_id) values ('$idx', '$id')");
-      move($_SERVER['HTTP_REFERER']);
     }
+    back();
   } else if ($_POST['action'] === 'edit') {
     $data = ['fetch' => DB::fetch("select * from board where idx = $idx")];
     views('board/edit', $data);
@@ -82,14 +81,14 @@ post('/likePost', function() {
     DB::exec("delete from board where idx = '$idx'");
     move('/', 'deleted');
   } else {
-    move($_SERVER['HTTP_REFERER'], 'Reported');
+    back('Reported');
   }
 });
 post('/addComment', function() {
   extract($_POST);
   $id = ss()->id;
   DB::exec("insert into comment (board_idx, user_id, content, time) values ($idx, '$id', '$comment', now())");
-  move($_SERVER['HTTP_REFERER']);
+  back();
 });
 post('/editProfile', function() {
   extract($_POST);
@@ -100,17 +99,24 @@ post('/editProfile', function() {
   } else {
     DB::exec("update user set description = '$description', gender = '$gender', pw = '$pw' where id = '$id'");
   }
-  move($_SERVER['HTTP_REFERER']);
+  back();
 });
 post('/editBoard', function() {
   extract($_POST);
   if ($_POST['action'] === "edit") {
-    DB::exec("update board set img = '$img', content = '$content', title = '$title', status = 'fixed' where idx = '$idx'");
+    // DB 업데이트 (이미지는 변경되지 않음)
+    DB::exec("UPDATE board SET content = '$content', title = '$title', status = 'fixed' WHERE idx = '$idx'");
   } else {
-    $from = $_FILES['img']['tmp_name'];
-    $img = 'uploads/' . time() . $_FILES['img']['name'];
-    move_uploaded_file($from, $img);
-    DB::exec("update board set img = '$img', content = '$content', title = '$title', status = 'fixed' where idx = '$idx'");
+    if (isset($_FILES['img']) && $_FILES['img']['error'] == 0) {
+      $from = $_FILES['img']['tmp_name'];
+      $img = 'uploads/' . time() . $_FILES['img']['name'];
+      move_uploaded_file($from, $img);
+      // DB 업데이트 (새로운 이미지 경로를 DB에 반영)
+      DB::exec("UPDATE board SET img = '$img', content = '$content', title = '$title', status = 'fixed' WHERE idx = '$idx'");
+    } else {
+      // DB 업데이트 (기존 이미지가 유지됨)
+      DB::exec("UPDATE board SET content = '$content', title = '$title', status = 'fixed' WHERE idx = '$idx'");
+    }
   }
   move('/');
 });
@@ -118,9 +124,14 @@ post('/addTodo', function() {
   extract($_POST);
   $id = ss()->id;
   DB::exec("insert into todo (user_id, title, content, begindate, enddate, color) values ('$id', '$todo', '$content', '$begindate', '$enddate', '$color')");
-  move($_SERVER['HTTP_REFERER']);
+  back();
 });
 get('/todo/{id}', function($id) {
   $data = ['fetch' => DB::fetch("select * from todo where idx = '$id'")];
   views('todo', $data);
+});
+post('/editTodo', function() {
+  extract($_POST);
+  DB::exec("update todo set title = '$title', content = '$content', status = '$status', begindate = '$begindate', enddate = '$enddate' where idx = $idx");
+  move('/calendar');
 });
